@@ -1,14 +1,14 @@
 package dev.galiev.vkinternship.service;
 
 import dev.galiev.vkinternship.dto.user.User;
-import dev.galiev.vkinternship.dto.user.Users;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface UsersService {
-    Users getUsers();
-    User getUserById(Integer id);
-    User create(User user);
-    User delete(User user);
-    User delete(Integer id);
-    User edit(User user);
-    User edit(Integer id);
+    ResponseEntity<List<User>> getUsers();
+    ResponseEntity<User> getUserById(Integer id);
+    ResponseEntity<User> create(User user);
+    ResponseEntity<Void> delete(Integer id);
+    ResponseEntity<User> edit(Integer id, User user);
 }

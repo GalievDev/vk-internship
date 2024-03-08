@@ -1,14 +1,14 @@
 package dev.galiev.vkinternship.service;
 
 import dev.galiev.vkinternship.dto.album.Album;
-import dev.galiev.vkinternship.dto.album.Albums;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface AlbumsService {
-    Albums getPosts();
-    Album getPost(Integer id);
-    Album create(Album album);
-    Album delete(Album album);
-    Album delete(Integer id);
-    Album edit(Album post);
-    Album edit(Integer id);
+    ResponseEntity<List<Album>> getAlbums();
+    ResponseEntity<Album> getAlbum(Integer id);
+    ResponseEntity<Album> create(Album album);
+    ResponseEntity<Void> delete(Integer id);
+    ResponseEntity<Album> edit(Integer id, Album album);
 }

@@ -1,14 +1,15 @@
 package dev.galiev.vkinternship.service;
 
 import dev.galiev.vkinternship.dto.post.Post;
-import dev.galiev.vkinternship.dto.post.Posts;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface PostsService {
-    Posts getPosts();
-    Post getPost(Integer id);
-    Post create(Post post);
-    Post delete(Post post);
-    Post delete(Integer id);
-    Post edit(Post post);
-    Post edit(Integer id);
+    ResponseEntity<List<Post>> getPosts();
+    ResponseEntity<Post> getPost(Integer id);
+    ResponseEntity<Post> create(Post post);
+
+    ResponseEntity<Void> delete(Integer id);
+    ResponseEntity<Post> edit(Integer id, Post post);
 }
