@@ -1,7 +1,6 @@
 package dev.galiev.vkinternship.controller;
 
 import dev.galiev.vkinternship.dto.user.User;
-import dev.galiev.vkinternship.repository.UserRepository;
 import dev.galiev.vkinternship.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +9,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8080/")
 @RestController
+@RequestMapping("/users")
 @RequiredArgsConstructor
-public class MainController {
-
-    @Autowired
-    private UserRepository users;
+public class UsersController {
 
     @Autowired
     private UsersService service;
+
+    @PostMapping("/")
+    public ResponseEntity<User> create(@RequestBody User user) {
+        return service.create(user);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable Integer id) {
