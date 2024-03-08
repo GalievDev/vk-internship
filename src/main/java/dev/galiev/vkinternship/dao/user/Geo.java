@@ -5,10 +5,7 @@ import lombok.*;
 
 @Setter
 @Getter
-@Builder(toBuilder = true)
 @EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "geo")
 @Table(name = "geos")
 public class Geo {
@@ -25,4 +22,13 @@ public class Geo {
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
+
+    public Geo() {
+    }
+
+    public Geo(String lng, String lat, Address address) {
+        this.lng = lng;
+        this.lat = lat;
+        this.address = address;
+    }
 }

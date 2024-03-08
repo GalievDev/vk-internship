@@ -5,10 +5,7 @@ import lombok.*;
 
 @Setter
 @Getter
-@Builder(toBuilder = true)
 @EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "address")
 @Table(name = "addresses")
 public class Address {
@@ -16,7 +13,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "zipCode")
+    @Column(name = "zip_code")
     private String zipCode;
 
     @OneToOne(mappedBy = "address")
@@ -34,4 +31,16 @@ public class Address {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Address() {
+    }
+
+    public Address(String zipCode, Geo geo, String suite, String city, String street, User user) {
+        this.zipCode = zipCode;
+        this.geo = geo;
+        this.suite = suite;
+        this.city = city;
+        this.street = street;
+        this.user = user;
+    }
 }

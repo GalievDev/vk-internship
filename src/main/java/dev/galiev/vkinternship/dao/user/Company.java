@@ -5,10 +5,7 @@ import lombok.*;
 
 @Setter
 @Getter
-@Builder(toBuilder = true)
 @EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "company")
 @Table(name = "companies")
 public class Company {
@@ -20,7 +17,7 @@ public class Company {
     @Column(name = "bs")
     private String bs;
 
-    @Column(name = "catchPhrase")
+    @Column(name = "catch_phrase")
     private String catchPhrase;
 
     @Column(name = "name")
@@ -29,4 +26,14 @@ public class Company {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Company() {
+    }
+
+    public Company(String bs, String catchPhrase, String name, User user) {
+        this.bs = bs;
+        this.catchPhrase = catchPhrase;
+        this.name = name;
+        this.user = user;
+    }
 }

@@ -5,10 +5,7 @@ import lombok.*;
 
 @Setter
 @Getter
-@Builder(toBuilder = true)
 @EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "user")
 @Table(name = "users")
 public class User {
@@ -36,4 +33,22 @@ public class User {
 
     @Column(name = "username")
     private String username;
+
+    public User() {
+    }
+
+    public User(String website, Address address, String phone, String name, Company company, String email, String username) {
+        this.website = website;
+        this.address = address;
+        this.phone = phone;
+        this.name = name;
+        this.company = company;
+        this.email = email;
+        this.username = username;
+    }
+
+    public User(String name, String username) {
+        this.name = name;
+        this.username = username;
+    }
 }
