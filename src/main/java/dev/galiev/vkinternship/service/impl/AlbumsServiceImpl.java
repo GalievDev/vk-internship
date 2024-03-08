@@ -20,7 +20,7 @@ public class AlbumsServiceImpl implements AlbumsService {
 
     public AlbumsServiceImpl() {
         this.client = WebClient.builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/posts/")
+                .baseUrl("https://jsonplaceholder.typicode.com/albums/")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultHeader(HttpHeaders.USER_AGENT, "dev.galiev.vkinternship")
                 .build();

@@ -2,7 +2,10 @@ package dev.galiev.vkinternship.service.impl;
 
 import dev.galiev.vkinternship.dto.user.User;
 import dev.galiev.vkinternship.service.UsersService;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
