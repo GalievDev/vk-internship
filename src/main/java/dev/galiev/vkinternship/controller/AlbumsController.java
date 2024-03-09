@@ -20,7 +20,8 @@ public class AlbumsController {
 
     @PostMapping("/")
     public ResponseEntity<Album> create(@RequestBody Album album) {
-        return service.create(album);
+        var createdAlbum = service.create(album);
+        return new ResponseEntity<>(createdAlbum.getBody(), createdAlbum.getStatusCode());
     }
 
     @GetMapping("/{id}")

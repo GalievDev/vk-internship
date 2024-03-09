@@ -2,6 +2,8 @@ package dev.galiev.vkinternship.service.impl;
 
 import dev.galiev.vkinternship.dto.album.Album;
 import dev.galiev.vkinternship.service.AlbumsService;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -27,6 +29,7 @@ public class AlbumsServiceImpl implements AlbumsService {
     }
 
     @Override
+    @Cacheable("albums")
     public ResponseEntity<List<Album>> getAlbums() {
         ResponseEntity<Album[]> response = client.get()
                 .retrieve()
@@ -37,6 +40,7 @@ public class AlbumsServiceImpl implements AlbumsService {
     }
 
     @Override
+    @Cacheable("albums")
     public ResponseEntity<Album> getAlbum(Integer id) {
         return client.get()
                 .uri(id.toString())
@@ -46,29 +50,31 @@ public class AlbumsServiceImpl implements AlbumsService {
     }
 
     @Override
+    @CachePut("albums")
     public ResponseEntity<Album> create(Album al) {
         return client.post()
-                .bodyValue(BodyInserters.fromValue(al))
+                .body(BodyInserters.fromObject(al))
                 .retrieve()
                 .toEntity(Album.class)
                 .block();
     }
 
     @Override
+    @CachePut("albums")
     public ResponseEntity<Void> delete(Integer id) {
         return client.method(HttpMethod.DELETE)
                 .uri(id.toString())
-                .bodyValue(BodyInserters.fromValue(getAlbum(id).getBody()))
                 .retrieve()
                 .toEntity(Void.class)
                 .block();
     }
 
     @Override
+    @CachePut("albums")
     public ResponseEntity<Album> edit(Integer id, Album album) {
         return client.put()
                 .uri(id.toString())
-                .body(BodyInserters.fromValue(album))
+                .body(BodyInserters.fromObject(album))
                 .retrieve()
                 .toEntity(Album.class)
                 .block();

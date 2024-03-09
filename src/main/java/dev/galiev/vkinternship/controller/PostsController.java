@@ -19,8 +19,9 @@ public class PostsController {
     private PostsService service;
 
     @PostMapping("/")
-    public ResponseEntity<Post> create(@RequestBody dev.galiev.vkinternship.dto.post.Post pos) {
-        return service.create(pos);
+    public ResponseEntity<Post> create(@RequestBody Post post) {
+        var createdPost = service.create(post);
+        return new ResponseEntity<>(createdPost.getBody(), createdPost.getStatusCode());
     }
 
     @GetMapping("/{id}")

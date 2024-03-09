@@ -2,6 +2,8 @@ package dev.galiev.vkinternship.service.impl;
 
 import dev.galiev.vkinternship.dto.post.Post;
 import dev.galiev.vkinternship.service.PostsService;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -27,6 +29,7 @@ public class PostsServiceImpl implements PostsService {
     }
 
     @Override
+    @Cacheable("posts")
     public ResponseEntity<List<Post>> getPosts() {
         ResponseEntity<Post[]> response = client.get()
                 .retrieve()
@@ -37,6 +40,7 @@ public class PostsServiceImpl implements PostsService {
     }
 
     @Override
+    @Cacheable("posts")
     public ResponseEntity<Post> getPost(Integer id) {
         return client.get()
                 .uri(id.toString())
@@ -46,29 +50,31 @@ public class PostsServiceImpl implements PostsService {
     }
 
     @Override
+    @CachePut("posts")
     public ResponseEntity<Post> create(Post post) {
         return client.post()
-                .bodyValue(BodyInserters.fromValue(post))
+                .body(BodyInserters.fromObject(post))
                 .retrieve()
                 .toEntity(Post.class)
                 .block();
     }
 
     @Override
+    @CachePut("posts")
     public ResponseEntity<Void> delete(Integer id) {
         return client.method(HttpMethod.DELETE)
                 .uri(id.toString())
-                .bodyValue(BodyInserters.fromValue(getPost(id).getBody()))
                 .retrieve()
                 .toEntity(Void.class)
                 .block();
     }
 
     @Override
+    @CachePut("posts")
     public ResponseEntity<Post> edit(Integer id, Post post) {
         return client.put()
                 .uri(id.toString())
-                .body(BodyInserters.fromValue(post))
+                .body(BodyInserters.fromObject(post))
                 .retrieve()
                 .toEntity(Post.class)
                 .block();

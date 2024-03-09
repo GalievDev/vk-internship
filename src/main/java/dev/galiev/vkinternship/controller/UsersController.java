@@ -20,7 +20,8 @@ public class UsersController {
 
     @PostMapping("/")
     public ResponseEntity<User> create(@RequestBody User user) {
-        return service.create(user);
+        var createdUser = service.create(user);
+        return new ResponseEntity<>(createdUser.getBody(), createdUser.getStatusCode());
     }
 
     @GetMapping("/{id}")
