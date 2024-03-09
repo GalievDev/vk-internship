@@ -81,7 +81,7 @@ Content-Type: application/json
 }
 ```
 
-### Used tools
+# Used tools
 
 * [Gradle](https://docs.gradle.org)
 * [Spring Boot](https://docs.spring.io/spring-boot/docs/3.2.3/gradle-plugin/reference/html/)
