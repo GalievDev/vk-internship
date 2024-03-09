@@ -44,5 +44,4 @@ public class VkinternshipApplication {
 			System.out.println("Albums access token: " + service.register(album).getToken());
 		};
 	}*/
-
 }

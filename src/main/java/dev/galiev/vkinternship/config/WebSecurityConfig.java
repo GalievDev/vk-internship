@@ -20,7 +20,6 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class WebSecurityConfig {
-    private static final String[] WHITE_LIST_URL = {"/auth/**"};
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
@@ -28,15 +27,15 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req ->
-                        req.requestMatchers(WHITE_LIST_URL)
-                                .permitAll()
-                                .requestMatchers("/users/**").hasAnyRole(Role.USERS.name(), Role.ADMIN.name())
-                                .requestMatchers("/posts/**").hasAnyRole(Role.POSTS.name(), Role.ADMIN.name())
-                                .requestMatchers("/albums/**").hasAnyRole(Role.ALBUMS.name(), Role.ADMIN.name())
-                                .anyRequest()
-                                .authenticated()
-                )
+                .authorizeHttpRequests(req -> {
+                    req.requestMatchers("/auth/**")
+                            .permitAll()
+                            .requestMatchers("/users/**").hasAnyRole(Role.USERS.name(), Role.ADMIN.name())
+                            .requestMatchers("/posts/**").hasAnyRole(Role.POSTS.name(), Role.ADMIN.name())
+                            .requestMatchers("/albums/**").hasAnyRole(Role.ALBUMS.name(), Role.ADMIN.name())
+                            .anyRequest()
+                            .authenticated();
+                })
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
