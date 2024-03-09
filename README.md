@@ -12,6 +12,16 @@ When you first start in the console you will see the **bearer token** for the fo
 
 **Use that token for any requests**
 
+Don't forget to connect your database in `application.propertires`
+```properties
+# Database url
+spring.datasource.url=jdbc:postgresql://127.0.0.1:5432/vkinternship
+# Login username of the database.
+spring.datasource.username=postgres
+# Login password of the database.
+spring.datasource.password=root
+```
+
 ### Controllers
 
 - localhost:8080/users/
