@@ -1,8 +1,13 @@
 package dev.galiev.vkinternship;
 
+import dev.galiev.vkinternship.auth.RegisterRequest;
+import dev.galiev.vkinternship.dao.user.Role;
+import dev.galiev.vkinternship.service.AuthenticationService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EnableCaching
@@ -12,7 +17,7 @@ public class VkinternshipApplication {
 		SpringApplication.run(VkinternshipApplication.class, args);
 	}
 
-/*	@Bean
+	@Bean
 	public CommandLineRunner commandLineRunner(
 			AuthenticationService service
 	) {
@@ -45,5 +50,5 @@ public class VkinternshipApplication {
 					.build();
 			System.out.println("Albums access token: " + service.register(album).getToken());
 		};
-	}*/
+	}
 }
